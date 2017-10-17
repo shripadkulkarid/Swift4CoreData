@@ -12,28 +12,16 @@ import CoreData
 class ViewController: UIViewController {
     @IBOutlet var tableview: UITableView!
     var names:[NSManagedObject] = []
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        
 
-      title = "The List"
+         title = "The List"
         
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
     }
-
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         guard let appDelegate =
@@ -87,23 +75,21 @@ class ViewController: UIViewController {
 
     }
     
-    func save (name : String){
+    func save (name : String)
+    {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {
             return
         }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Person", in: managedContext)
         
         let person = NSManagedObject(entity: entity!,
                                      insertInto: managedContext)
         
         person.setValue(name, forKeyPath: "name")
-        
-        
-        
+ 
         do {
             try managedContext.save()
             names.append(person)
@@ -112,7 +98,7 @@ class ViewController: UIViewController {
         }
         
         
-    }
+  }
 
     /*
     // MARK: - Navigation
@@ -127,7 +113,8 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController:UITableViewDataSource{
+extension ViewController:UITableViewDataSource
+{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return names.count
     }
@@ -136,23 +123,11 @@ extension ViewController:UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         let people = names[indexPath.row]
-        cell?.textLabel?.text = people.value(forKey: "name") as! String
+        cell?.textLabel?.text = people.value(forKey: "name") as? String
         
         return cell!
     
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 
